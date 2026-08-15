@@ -1,0 +1,79 @@
+-- 1. Sort regulatory documents by publication date
+SELECT
+    document_id,
+    title,
+    publication_date
+FROM regulatory_documents
+ORDER BY publication_date DESC;
+
+
+-- 2. Find active regulatory documents
+SELECT
+    document_id,
+    title,
+    status
+FROM regulatory_documents
+WHERE status = 'Active';
+
+
+-- 3. Find guidance and policy statements
+SELECT
+    document_id,
+    title,
+    document_type
+FROM regulatory_documents
+WHERE document_type IN ('Guidance', 'Policy Statement');
+
+
+-- 4. Count documents by publisher
+SELECT
+    publishers.publisher_name,
+    publishers.publisher_id,
+    COUNT(regulatory_documents.document_id) AS number_of_docs
+FROM publishers
+LEFT JOIN regulatory_documents
+    ON publishers.publisher_id = regulatory_documents.publisher_id
+GROUP BY
+    publishers.publisher_name,
+    publishers.publisher_id
+ORDER BY COUNT(regulatory_documents.document_id) DESC;
+
+
+-- 5. Count documents by jurisdiction
+SELECT
+    jurisdictions.jurisdiction_id,
+    jurisdictions.jurisdiction_name,
+    COUNT(regulatory_documents.document_id) AS number_of_documents
+FROM jurisdictions
+LEFT JOIN regulatory_documents
+    ON jurisdictions.jurisdiction_id = regulatory_documents.jurisdiction_id
+GROUP BY
+    jurisdictions.jurisdiction_id,
+    jurisdictions.jurisdiction_name;
+
+
+-- 6. Find jurisdictions with more than two documents
+SELECT
+    jurisdictions.jurisdiction_id,
+    jurisdictions.jurisdiction_name,
+    COUNT(regulatory_documents.document_id) AS number_of_documents
+FROM jurisdictions
+LEFT JOIN regulatory_documents
+    ON jurisdictions.jurisdiction_id = regulatory_documents.jurisdiction_id
+GROUP BY
+    jurisdictions.jurisdiction_id,
+    jurisdictions.jurisdiction_name
+HAVING COUNT(regulatory_documents.document_id) > 2;
+
+
+-- 7. Categorise documents based on status
+SELECT
+    document_id,
+    title,
+    status,
+    CASE
+        WHEN status = 'Active' THEN 'Current'
+        WHEN status = 'Archived' THEN 'Historical'
+        ELSE 'Other'
+    END AS status_category
+FROM regulatory_documents;

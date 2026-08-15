@@ -1,0 +1,36 @@
+--Create table publishers
+
+CREATE TABLE publishers (publisher_id INTEGER PRIMARY KEY, 
+			publisher_name TEXT, 
+			country TEXT, 
+			website TEXT);
+
+--Create table jurisdictions
+CREATE TABLE jurisdictions (jurisdiction_id INTEGER PRIMARY KEY,
+			jurisdiction_name TEXT,
+			region TEXT);
+
+--Create table regulatory_documents
+CREATE TABLE regulatory_documents (document_id INTEGER PRIMARY KEY,
+				title TEXT,
+				publisher_id INTEGER,
+				jurisdiction_id INTEGER,
+				document_type TEXT,
+				publication_date DATE,
+				effective_date DATE,
+				status TEXT,
+				source_url TEXT,
+				description TEXT,
+				FOREIGN KEY (publisher_id) REFERENCES publishers (publisher_id),
+				FOREIGN KEY (jurisdiction_id) REFERENCES jurisdictions (jurisdiction_id) );
+
+--Create table topics
+CREATE TABLE topics (topic_id INTEGER PRIMARY KEY,
+		     topic_name TEXT);
+
+--Create table document_topics
+CREATE TABLE document_topics (  document_id INTEGER,
+    				topic_id INTEGER,
+				PRIMARY KEY (document_id, topic_id),
+				FOREIGN KEY (document_id) REFERENCES regulatory_documents (document_id),
+				FOREIGN KEY (topic_id) REFERENCES topics (topic_id));
