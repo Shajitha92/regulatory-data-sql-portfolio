@@ -91,3 +91,41 @@ JOIN document_topics
 	ON regulatory_documents.document_id = document_topics.document_id
 JOIN topics
 	ON topics.topic_id = document_topics.topic_id;
+
+
+-- 9. Show documents with publisher and jurisdiction
+SELECT
+    regulatory_documents.title,
+    publishers.publisher_name,
+    jurisdictions.jurisdiction_name
+FROM regulatory_documents
+JOIN publishers
+    ON regulatory_documents.publisher_id = publishers.publisher_id
+JOIN jurisdictions
+    ON regulatory_documents.jurisdiction_id = jurisdictions.jurisdiction_id;
+
+
+-- 10. Count documents by publisher, including publishers with no documents
+SELECT
+    publishers.publisher_name,
+    COUNT(regulatory_documents.document_id) AS num_of_docs
+FROM publishers
+LEFT JOIN regulatory_documents
+    ON publishers.publisher_id = regulatory_documents.publisher_id
+GROUP BY
+    publishers.publisher_id,
+    publishers.publisher_name
+ORDER BY num_of_docs DESC;
+
+
+-- 11. Show jurisdictions with more than two documents
+SELECT
+    jurisdictions.jurisdiction_name,
+    COUNT(regulatory_documents.document_id) AS num_of_docs
+FROM jurisdictions
+LEFT JOIN regulatory_documents
+    ON jurisdictions.jurisdiction_id = regulatory_documents.jurisdiction_id
+GROUP BY
+    jurisdictions.jurisdiction_id,
+    jurisdictions.jurisdiction_name
+HAVING COUNT(regulatory_documents.document_id) > 2;
