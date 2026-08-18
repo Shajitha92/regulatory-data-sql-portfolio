@@ -77,3 +77,17 @@ SELECT
         ELSE 'Other'
     END AS status_category
 FROM regulatory_documents;
+
+
+--8. Show document title, publisher_name, topic_name
+SELECT  title, 
+	publishers.publisher_name, 
+	topics.topic_name
+FROM regulatory_documents
+JOIN publishers
+	ON regulatory_documents.publisher_id = publishers.publisher_id
+
+JOIN document_topics
+	ON regulatory_documents.document_id = document_topics.document_id
+JOIN topics
+	ON topics.topic_id = document_topics.topic_id;
