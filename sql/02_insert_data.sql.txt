@@ -189,15 +189,15 @@ INSERT INTO topics (
 )
 VALUES
     (1, 'Anti-Money Laundering'),
-    (2, 'Consumer Protection'),
-    (3, 'Prudential Regulation'),
-    (4, 'Market Conduct'),
-    (5, 'MiFID II'),
-    (6, 'Risk Management'),
-    (7, 'Capital Requirements'),
-    (8, 'ICT and Operational Resilience'),
-    (9, 'Governance'),
-    (10, 'Regulatory Reporting');
+    (2, 'Banking'),
+    (3, 'Consumer Protection'),
+    (4, 'Investment Services'),
+    (5, 'Market Abuse'),
+    (6, 'Sustainability'),
+    (7, 'Cyber & ICT Risk'),
+    (8, 'Capital Requirements'),
+    (9, 'Financial Crime'),
+    (10, 'Operational Resilience');
 
 
 
