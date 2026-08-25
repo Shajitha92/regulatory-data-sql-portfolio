@@ -88,9 +88,9 @@ The project currently contains:
 * **20 regulatory publishers**
 * **30 regulatory documents**
 * **10 regulatory topics**
-* **37 document-topic relationships**
+* **42 document-topic relationships**
 
-The dataset combines fictional project records with selected publicly available regulatory document references and publisher websites for portfolio and learning purposes.
+The dataset combines fictional project records with selected real-world regulatory document references and publisher websites for portfolio and learning purposes. It includes regulatory documents from 20 publishers across the United Kingdom, European Union, Germany, France, Ireland, Netherlands, Belgium, Luxembourg, Switzerland and the United States.
 
 No employer or confidential data is used in this project.
 
